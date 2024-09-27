@@ -36,18 +36,18 @@ const cartSlice = createSlice({
     },
 
     
-    // saveShippingAddress: (state, action) => {
-    //   state.shippingAddress = action.payload;
-    //   localStorage.setItem('cart', JSON.stringify(state));
-    // },
-    // savePaymentMethod: (state, action) => {
-    //   state.paymentMethod = action.payload;
-    //   localStorage.setItem('cart', JSON.stringify(state));
-    // },
-    // clearCartItems: (state, action) => {
-    //   state.cartItems = [];
-    //   localStorage.setItem('cart', JSON.stringify(state));
-    // },
+    saveShippingAddress: (state, action) => {
+      state.shippingAddress = action.payload;
+      localStorage.setItem('cart', JSON.stringify(state));
+    },
+    savePaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload;
+      localStorage.setItem('cart', JSON.stringify(state));
+    },
+    clearCartItems: (state, action) => {
+      state.cartItems = [];
+      localStorage.setItem('cart', JSON.stringify(state));
+    },
 
 
     // NOTE: here we need to reset state for when a user logs out so the next

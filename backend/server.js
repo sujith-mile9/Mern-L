@@ -4,6 +4,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productsRouters from './routes/productsRoutes.js'
 import useRoutes from './routes/useRoutes.js'
 import cookieParser from 'cookie-parser';
+import orderRoutes from './routes/orderRoutes.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -22,8 +23,11 @@ app.get('/', (req,res)=>{
 app.use('/api/products',productsRouters)
 app.use('/api/users',useRoutes)
 
+app.use('/api/orders', orderRoutes);
 
-
+app.get('/api/config/paypal', (req, res) =>
+    res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
+  );
 
 app.use(notFound)
 app.use(errorHandler)
