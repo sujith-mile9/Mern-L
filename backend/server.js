@@ -1,3 +1,5 @@
+
+import path from 'path';
 import express from 'express';
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
@@ -5,6 +7,7 @@ import productsRouters from './routes/productsRoutes.js'
 import useRoutes from './routes/useRoutes.js'
 import cookieParser from 'cookie-parser';
 import orderRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js'
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -25,10 +28,19 @@ app.use('/api/users',useRoutes)
 
 app.use('/api/orders', orderRoutes);
 
+app.use('/api/upload', uploadRoutes)
+
+
 app.get('/api/config/paypal', (req, res) =>
     res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
   );
 
+
+  const __dirname = path.resolve();
+  app.use('/uploads', express.static('/var/data/uploads'));
+  app.use(express.static(path.join(__dirname, '/frontend/build')));
+
+  
 app.use(notFound)
 app.use(errorHandler)
 app.listen(port, ()=>console.log(`Server running on ${port}`))
