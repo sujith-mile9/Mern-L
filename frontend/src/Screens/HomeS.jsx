@@ -4,9 +4,10 @@ import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product'
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { useEffect,useState } from 'react';
-import { useGetProductsQuery } from '../slices/productApiSlice';
 
+import { useGetProductsQuery } from '../slices/productApiSlice';
+import ProductCarousel from '../components/ProductCarousel';
+import Meta from '../components/Meta';
 function HomeS() {
     const { data: products , isloading, isError} = useGetProductsQuery();
     
@@ -15,6 +16,8 @@ function HomeS() {
                 {isloading ? (<Loader/>) : isError ? (<Message> {isError?.data?.messgae || isError.error}</Message>): (
 
                     <>
+                        <ProductCarousel/>
+                        <Meta />
                         <h1>Latest Products</h1>
                             <Row>
                                 {products?.map((product) => (
